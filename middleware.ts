@@ -35,26 +35,13 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
-  // Permitir /login sin sesión
-  if (!user && pathname === '/login') {
-    return supabaseResponse
-  }
-
-  // Si NO está logueado → mandar a /login
-  if (!user) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  // Si SÍ está logueado y va a /login → mandar a /
-  if (user && pathname === '/login') {
-    return NextResponse.redirect(new URL('/', request.url))
-  }
+  if (!user && pathname === '/login') return supabaseResponse
+  if (!user) return NextResponse.redirect(new URL('/login', request.url))
+  if (user && pathname === '/login') return NextResponse.redirect(new URL('/', request.url))
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 }
