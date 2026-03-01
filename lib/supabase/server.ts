@@ -18,8 +18,7 @@ export async function createClient() {
               cookieStore.set(name, value, options as any)
             })
           } catch {
-            // // SC
-
+            // SC
           }
         },
       },
