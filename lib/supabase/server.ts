@@ -1,10 +1,11 @@
 import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
+import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
 type CookieToSet = {
   name: string
   value: string
-  options?: Parameters<ReturnType<typeof cookies>['set']>[2]
+  options?: Partial<ResponseCookie>
 }
 
 export async function createClient() {
